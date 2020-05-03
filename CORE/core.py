@@ -4,8 +4,8 @@
 #Projet:    Generic updateHelper
 
 #Author:    Noah Fouts
-#Version:   0.1.0.0
-#Version Name:  INDEV 0.1.0
+#Version:   0.2.0.0
+#Version Name:  INDEV 0.2.0
 #Updated:   2020-05-02T11:24 PM PSTT
 
 #This Source Code Form is subject to the terms of the Mozilla Public
@@ -24,17 +24,7 @@ logger = logging.getLogger("updateHelper")
 def startCore():
     minBaseVersion =  "0.0.1"
     configFileDump = checkVersion.readConfig(checkVersion, "../config/updateConfig.cfg")
-    try:
-        configFileRemoteLocation = checkVersion.getUpdateConfigRemote(checkVersion, configFileDump["version-update-URL"])
-        configFileRemmote = open(configFileRemoteLocation, "r")
-        configFileRemmoteText = configFileRemmote.read()
-        configFileRemmote.close()
-        configFileRemmote.close()
-        configFileRemmoteDump = json.loads(configFileRemmoteText)
-    except FileNotFoundError as e:
-        logger.critical("Remote pdate Configuration file not found in " + configFileRemoteLocation + "ERROR: " + str(e))
-        pass
-    logger.info("Remote version " + configFileRemmoteDump["version"])
+    configFileRemmoteDump = checkVersion.readConfigRemote(checkVersion, configFileDump)
     checkVersion.checkVersionCompat(checkVersion, configFileDump["version"], minBaseVersion, configFileRemmoteDump["version"])
     #TODO Implent SHA-512 file verification
 
@@ -84,6 +74,19 @@ class checkVersion:
         else:
             logger.info("Nothing to upgrade!")
     
+    def readConfigRemote(self, configFileDump):
+        try:
+            configFileRemoteLocation = checkVersion.getUpdateConfigRemote(checkVersion, configFileDump["version-update-URL"])
+            configFileRemmote = open(configFileRemoteLocation, "r")
+            configFileRemmoteText = configFileRemmote.read()
+            configFileRemmote.close()
+            configFileRemmoteDump = json.loads(configFileRemmoteText)
+        except FileNotFoundError as e:
+            logger.critical("Remote pdate Configuration file not found in " + configFileRemoteLocation + "ERROR: " + str(e))
+            pass
+        logger.info("Remote version " + configFileRemmoteDump["version"])
+        return configFileRemmoteDump
+
     def getUpdateConfigRemote(self, versionUpdateURL):
         downloadLocation = os.path.relpath("temp", os.path.dirname(os.getcwd()))
         logger.debug("Download to: " + downloadLocation)
@@ -103,5 +106,5 @@ class checkVersion:
         #    logger.info("Replaceing file and trying ag"
         #
 
-    def checkFileVersion():
+    def checkFileVersion(self):
         raise NotImplementedError
