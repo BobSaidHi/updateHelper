@@ -1,5 +1,5 @@
 {
-    "format": "0.2.0",
+    "format": "0.1.2",
     "module": "updateHelper",
     "uuid": "4cf77112-f095-48f4-8372-40b614162580",
     "description": "module updater",
@@ -11,20 +11,8 @@
         null
     ],
     "files": [
-        {
-            "path": "CORE/core.py",
-            "SHA-512": null,
-            "version": "0.1.0.0"
-        },
-        {
-            "path": "gui/gui.py",
-            "SHA-512": null,
-            "version": null
-        },
-        {
-            "path": "main.py",
-            "SHA-512": null,
-            "version": "0.1.0.0"
-        }
+        "CORE/core.py",
+        "gui/gui.py",
+        "main.py"
     ]
 }
