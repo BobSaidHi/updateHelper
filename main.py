@@ -4,8 +4,8 @@
 #Projet:    Generic updateHelper
 
 #Author:    Noah Fouts
-#Version:   0.1.0.0
-#Version Name:  INDEV 0.1
+#Version:   0.1.1.0
+#Version Name:  INDEV 1.1
 #Updated:   2020-05-02T05:25 PM PST
 
 #This Source Code Form is subject to the terms of the Mozilla Public
@@ -17,6 +17,7 @@ import os
 import sys
 from datetime import datetime
 from CORE import core
+from gui import gui
 
 #Start Logger
 logger = logging.getLogger("updateHelper")
@@ -48,6 +49,7 @@ logger.addHandler(ch)
 logger.debug("Log to console handler created!")
 logger.info("Imported modules and started Logger.")
 
+
 argsCount = 0
 for i in sys.argv:
     argsCount += 1
@@ -60,3 +62,4 @@ elif(argsCount > 1):
     
 else:
     logger.info("Starting with gui")
+    gui.startGUI()

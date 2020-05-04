@@ -4,16 +4,16 @@
 #Projet:    Generic updateHelper
 
 #Author:    Noah Fouts
-#Version:   0.2.0.0
-#Version Name:  INDEV 0.2.0
+#Version:   0.2.1.0
+#Version Name:  INDEV 2.1
 #Updated:   2020-05-02T11:24 PM PSTT
 
 #This Source Code Form is subject to the terms of the Mozilla Public
 #  License, v. 2.0. If a copy of the MPL was not distributed with this
 #  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import logging
 import json
+import logging
 import os
 from urllib.request import urlretrieve
 
@@ -22,7 +22,7 @@ logger = logging.getLogger("updateHelper")
 
 #non-GUI
 def startCore():
-    minBaseVersion =  "0.0.1"
+    minBaseVersion =  "0.2.0"
     configFileDump = checkVersion.readConfig(checkVersion, "../config/updateConfig.cfg")
     configFileRemmoteDump = checkVersion.readConfigRemote(checkVersion, configFileDump)
     checkVersion.checkVersionCompat(checkVersion, configFileDump["version"], minBaseVersion, configFileRemmoteDump["version"])
